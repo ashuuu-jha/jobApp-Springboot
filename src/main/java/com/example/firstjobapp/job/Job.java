@@ -1,12 +1,22 @@
 package com.example.firstjobapp.job;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name="job_table")
 public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // this if for unique earlier which we were increasing earlier
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String salary;
+
+    //default constructor required for JPA
+    public Job() {
+    }
 
     public Job(Long id, String title, String description, String minSalary, String maxSalary, String salary) {
         this.id = id;
