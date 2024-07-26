@@ -1,5 +1,6 @@
 package com.example.firstjobapp.job;
 
+import com.example.firstjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,9 @@ public class Job {
     private String maxSalary;
     private String salary;
 
+    @ManyToOne
+    private Company company;
+
     //default constructor required for JPA
     public Job() {
     }
@@ -25,6 +29,14 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.salary = salary;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getId() {
