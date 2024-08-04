@@ -4,6 +4,7 @@ import com.example.firstjobapp.company.Company;
 import com.example.firstjobapp.company.CompanyRepository;
 import com.example.firstjobapp.company.CompanyService;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -27,9 +28,9 @@ public class CompanyServiceImpl implements CompanyService {
         if (companyOptional.isPresent()) {
             Company existingCompany = companyOptional.get();
 
-            existingCompany.setName(company.getName());
-            existingCompany.setDescription(company.getDescription());
-            existingCompany.setJobs(company.getJobs());
+//            existingCompany.setName(company.getName());
+//            existingCompany.setDescription(company.getDescription());
+//            existingCompany.setJobs(company.getJobs());
             companyRepository.save(existingCompany);
             return true;
         }
@@ -37,8 +38,22 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    public boolean deleteCompanyById(Long id) {
+        if(companyRepository.existsById(id)){
+            companyRepository.deleteById(id);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
     public void createCompany(Company company) {
-        companyRepository.save(company);
+
+    }
+    @Override
+    public Company getCompanyById(Long id) {
+        return companyRepository.findById(id).orElse(null);
     }
 
 }
